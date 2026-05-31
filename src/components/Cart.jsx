@@ -1,28 +1,33 @@
-import Modal from "./Modal";
 import classes from "./Cart.module.css";
 
-const Cart = () => {
+
+const Cart = (props) => {
   return (
-    <Modal>
-      <div className={classes.cartItem}>
+    <>
+      <div className="backdrop"></div>
+
+      <div className="cart-modal">
         <h3>Sushi</h3>
-      </div>
 
-      <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>$35.62</span>
-      </div>
+        <div className="total">
+          <span>Total Amount</span>
+          <span>$35.62</span>
+        </div>
 
-      <div className={classes.actions}>
-        <button className={classes.close}>
-          Close
-        </button>
+        <div className="actions">
+          <button
+            className="close-btn"
+            onClick={props.onClose}
+          >
+            Close
+          </button>
 
-        <button className={classes.order}>
-          Order
-        </button>
+          <button className="order-btn">
+            Order
+          </button>
+        </div>
       </div>
-    </Modal>
+    </>
   );
 };
 
