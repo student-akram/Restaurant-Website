@@ -42,6 +42,21 @@ const AvailableMeals = () => {
                 ${meal.price}
               </p>
             </div>
+
+            <form className={classes.form}>
+              <div className={classes.input}>
+                <label>Amount</label>
+
+                <input
+                  type="number"
+                  min="1"
+                  max="5"
+                  defaultValue="1"
+                />
+              </div>
+
+              <button type="button">+ Add</button>
+            </form>
           </li>
         ))}
       </ul>
