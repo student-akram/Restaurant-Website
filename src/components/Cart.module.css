@@ -1,0 +1,73 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 20;
+}
+
+.modal {
+  position: fixed;
+
+  top: 20vh;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 40rem;
+  max-width: 90%;
+
+  background: white;
+  border-radius: 14px;
+
+  padding: 1rem;
+
+  z-index: 30;
+}
+
+.cartItem h3 {
+  margin-bottom: 1rem;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 1rem;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 1rem;
+
+  margin-top: 1rem;
+}
+
+.close {
+  background: white;
+  border: 1px solid #8a2b06;
+
+  color: #8a2b06;
+
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+}
+
+.order {
+  background: #8a2b06;
+  border: none;
+
+  color: white;
+
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+}
