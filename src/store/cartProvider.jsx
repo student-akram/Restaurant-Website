@@ -27,30 +27,30 @@ const CartProvider = (props) => {
     });
   };
 
-  const removeItemHandler = (id) => {
-    setItems((prevItems) => {
-      const existingItemIndex = prevItems.findIndex(
-        (item) => item.id === id
+const removeItemHandler = (id) => {
+  setItems((prevItems) => {
+    const existingItemIndex = prevItems.findIndex(
+      (item) => item.id === id
+    );
+
+    const existingItem = prevItems[existingItemIndex];
+
+    if (existingItem.amount === 1) {
+      return prevItems.filter(
+        (item) => item.id !== id
       );
+    }
 
-      const existingItem = prevItems[existingItemIndex];
+    const updatedItems = [...prevItems];
 
-      if (existingItem.amount === 1) {
-        return prevItems.filter(
-          (item) => item.id !== id
-        );
-      }
+    updatedItems[existingItemIndex] = {
+      ...existingItem,
+      amount: existingItem.amount - 1,
+    };
 
-      const updatedItems = [...prevItems];
-
-      updatedItems[existingItemIndex] = {
-        ...existingItem,
-        amount: existingItem.amount - 1,
-      };
-
-      return updatedItems;
-    });
-  };
+    return updatedItems;
+  });
+};
 
   const cartContext = {
     items,

@@ -5,6 +5,12 @@ import classes from "./Cart.module.css";
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
 
+  const totalAmount = cartCtx.items
+    .reduce((total, item) => {
+      return total + item.price * item.amount;
+    }, 0)
+    .toFixed(2);
+
   return (
     <>
       <div
@@ -16,7 +22,18 @@ const Cart = (props) => {
         <h2>Your Cart</h2>
 
         {cartCtx.items.length === 0 && (
-          <p>No Items Added</p>
+          <>
+            <p>No Items Added</p>
+
+            <div className={classes.buttonActions}>
+              <button
+                className={classes.closeBtn}
+                onClick={props.onClose}
+              >
+                Close
+              </button>
+            </div>
+          </>
         )}
 
         {cartCtx.items.map((item) => (
@@ -26,12 +43,19 @@ const Cart = (props) => {
           >
             <div>
               <h3>{item.name}</h3>
-              <p>
-                ${item.price} x {item.amount}
-              </p>
+
+              <div className={classes.summary}>
+                <span className={classes.price}>
+                  ${item.price.toFixed(2)}
+                </span>
+
+                <span className={classes.amount}>
+                  x {item.amount}
+                </span>
+              </div>
             </div>
 
-            <div className={classes.controls}>
+            <div className={classes.actions}>
               <button
                 onClick={() =>
                   cartCtx.removeItem(item.id)
@@ -54,11 +78,27 @@ const Cart = (props) => {
           </div>
         ))}
 
-        <div className={classes.actions}>
-          <button onClick={props.onClose}>
-            Close
-          </button>
-        </div>
+        {cartCtx.items.length > 0 && (
+          <>
+            <div className={classes.total}>
+              <span>Total Amount</span>
+              <span>${totalAmount}</span>
+            </div>
+
+            <div className={classes.buttonActions}>
+              <button
+                className={classes.closeBtn}
+                onClick={props.onClose}
+              >
+                Close
+              </button>
+
+              <button className={classes.orderBtn}>
+                Order
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </>
   );
