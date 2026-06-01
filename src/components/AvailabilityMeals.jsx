@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import CartContext from "../store/CartContext";
 import classes from "./AvailableMeals.module.css";
 
 const DUMMY_MEALS = [
@@ -19,49 +21,44 @@ const DUMMY_MEALS = [
     description: "American, raw, meaty",
     price: 12.99,
   },
-  {
-    id: "m4",
-    name: "Green Bowl",
-    description: "Healthy and green",
-    price: 18.99,
-  },
 ];
 
-const AvailableMeals = () => {
+const AvailabilityMeals = () => {
+  const cartCtx = useContext(CartContext);
+
+  const addItemHandler = (meal) => {
+    cartCtx.addItem({
+      ...meal,
+      amount: 1,
+    });
+  };
+
   return (
     <section className={classes.meals}>
-      <ul>
-        {DUMMY_MEALS.map((meal) => (
-          <li key={meal.id} className={classes.meal}>
-            <div>
-              <h3>{meal.name}</h3>
-              <p className={classes.description}>
-                {meal.description}
-              </p>
-              <p className={classes.price}>
-                ${meal.price}
-              </p>
-            </div>
+  <ul>
+    {DUMMY_MEALS.map((meal) => (
+      <li key={meal.id}>
+        <div>
+          <h3>{meal.name}</h3>
 
-            <form className={classes.form}>
-              <div className={classes.input}>
-                <label>Amount</label>
+          <p>{meal.description}</p>
 
-                <input
-                  type="number"
-                  min="1"
-                  max="5"
-                  defaultValue="1"
-                />
-              </div>
+          <p className={classes.price}>
+            ${meal.price}
+          </p>
+        </div>
 
-              <button type="button">+ Add</button>
-            </form>
-          </li>
-        ))}
-      </ul>
-    </section>
+        <button
+          className={classes.addBtn}
+          onClick={() => addItemHandler(meal)}
+        >
+          + Add
+        </button>
+      </li>
+    ))}
+  </ul>
+</section>
   );
 };
 
-export default AvailableMeals;
+export default AvailabilityMeals;
